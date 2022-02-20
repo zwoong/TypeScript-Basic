@@ -12,3 +12,4 @@ function leakingAny(obj) {
     return b;
 }
 const c = leakingAny({ num: 0 });
+
