@@ -433,3 +433,99 @@ const ExP = new ExtendsPerson();
 
 ExP.setName("Jack"); // Jack
 ```
+
+</br>
+
+### Generic
+Generic : 데이터의 타입을 일반화한다는 것을 뜻한다. </br>
+자료형을 정하지 않고 여러 타입을 사용할 수 있게 해준다.
+
+</br>
+
+```ts
+function helloString(message: string): string {
+    return message;
+} 
+
+function helloNumber(message: number): number {
+    return message;
+}
+    
+// 더 많은 반복된 함수들...
+
+function hello(message: any): any {
+    return message;
+}
+
+console.log(hello('MArk').length);
+console.log(hello(39).length);
+
+function helloGeneric<T>(message: T): T {
+    return message;
+} 
+
+console.log(helloGeneric('Mark').length);
+// console.log(helloGeneric(39).length); error!!
+console.log(helloGeneric(true));
+```
+
+</br>
+
+### Generic Array & Tuple
+
+```ts
+function helloArray<T>(message: T[]): T {
+    return message[0];
+}
+
+helloArray(['Hello', 'World']); 
+helloArray(['Hello', 5]);
+// function helloArray<string | number>(message: (string |number)[]): string | number
+
+function helloTuple<T, K>(message: [T,K]): T {
+    return message[0];
+}
+
+helloTuple(["Hello", "World"]);
+helloTuple(["Hello", 5]);
+// function helloTuple<string, number>(message: [string, number]): string
+```
+
+</br>
+
+### class에서 generic 사용하기
+
+```ts
+class PersonGeneric<T, K> {
+    private _name: T;
+    private _age: K;
+
+    constructor(name: T, age: K) {
+        this._name = name;
+        this._age = age;
+    }
+}
+
+new PersonGeneric("Mark", 39);
+
+// new PersonGeneric<string, number>("Mark", "age"); error!!
+new PersonGeneric<string, number>("Mark", 39);
+```
+
+</br>
+
+### Generic extends 
+
+```ts
+class PersonExtends<T extends string | number> {
+    private _name: T;
+
+    constructor(name: T) {
+        this._name = name;
+    }
+}
+
+new PersonExtends("Mark");
+new PersonExtends(39);
+// new PersonExtends(true); Argument of type 'boolean' is not assignable to parameter of type 'string | number'
+```
