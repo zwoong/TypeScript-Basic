@@ -2,6 +2,7 @@
 function hello(person) {
     console.log(`안녕하세요! ${person.name}(${person.age}) 입니다.`);
 }
+;
 const p1 = {
     name: "Mark",
     age: 39
